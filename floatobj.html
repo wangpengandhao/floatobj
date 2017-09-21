@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	.box{
+		width: 200px;
+		height: 200px;
+		background: skyblue;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+</style>
+<body>
+	<div class="box"></div>
+</body>
+<script>
+	window.onload=function(){
+
+		function Float(obj){
+			this.obj=obj;
+			this.maxX=window.innerWidth-this.obj.offsetWidth;
+			this.speedX=10;
+			console.log(this)
+		}
+		Float.prototype.stop=function(){
+			clearInterval(this.t)
+		}
+		Float.prototype.resize=function(){
+			this.maxX=innerWidth-this.obj.offsetWidth;
+		}
+		Float.prototype.move=function(){
+			let that=this;
+			this.t=setInterval(function(){
+				let lefts=that.obj.offsetLeft+that.speedX;
+				if(lefts>=that.maxX){
+					lefts=that.maxX;
+					that.speedX*=-1;
+				}
+				if(lefts<=0){
+					lefts=0;
+					that.speedX*=-1;
+				}
+				that.obj.style.left=lefts+'px';
+			}, 60)
+		}
+		let box=document.getElementsByClassName('box')[0];
+		let obj =new Float(box);
+		obj.move();
+		box.onmouseover=function(){
+			obj.stop();
+		}
+		box.onmouseout=function(){
+			obj.move();
+		}
+		window.onresize=function(){
+			obj.resize();
+		}
+	}
+</script>
+</html>
+<!-- 一个方法套一个函数指向window -->
+<!-- 
+属性：对象描述
+	谁？ 速度、偏移量(最大值)
+方法：功能
+	动画：move
+ -->

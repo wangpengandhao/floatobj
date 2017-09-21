@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<!-- 元素节点、文档节点、属性节点 、注释节点-->
+	<div class="box">
+		hellow
+		<div class ="son">
+			son
+			<span>这是son</span>
+		</div>
+		<p>这是son</p>
+		<div>wode</div>
+	</div>
+</body>
+<script>
+	window.onload=function(){
+		// let box=document.getElementsByClassName('box');
+		// let box = document.querySelector('div')
+		// let boxs=box.lastElementChild
+		// let boxs=box.nextElementSibling
+		// 
+		// children(box)
+		
+		// 用childNodes模拟children
+		let parent = document.querySelector('div')
+		function children(parent){
+			let newarr=[];
+			let childs=parent.childNodes;
+			childs.forEach(element=>{
+				if(element.nodeType==1){
+					newarr.push(element);
+				}
+			})
+			return newarr;
+		}
+		let child=children(parent);
+		console.log(child)
+
+		/*let parents = document.getElementsByClassName('son')[0];
+		function next(element,tagname){
+			let parent=element.parentNode;
+			let child=parent.children;
+			let index=0;
+			for(let i=0;i<child.length;i++){
+				if(child[i]==element){
+					index=i;
+					break;
+				}
+			}
+			let nextAll=Array.from(child).slice(index);
+			for(let i=0;i<nextAll.length;i++){
+				if(nextAll[i].nodeName==tagname){
+					return nextAll[i];		
+				}
+			}
+		}
+		let childs = next(parents,'div')
+		console.log(childs)*/
+		
+
+
+	}
+	
+</script>
+</html>
